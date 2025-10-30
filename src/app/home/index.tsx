@@ -7,8 +7,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("@/assets/logo.png")} />
-      <Input placeholder="O que você precisa comprar?" />
-      <Button title="Adicionar" />
+
+      <View style={styles.form}>
+        <Input placeholder="O que você precisa comprar?" />
+        <Button title="Adicionar" />
+      </View>
+
+      <View style={styles.content}>
+
+      </View>
+
     </View>
   );
 }
