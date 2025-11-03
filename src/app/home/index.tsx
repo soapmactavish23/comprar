@@ -1,11 +1,13 @@
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import { styles } from "./styles";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { Filter } from "@/components/Filter";
 import { FilterStatus } from "@/types/FilterStatus";
 
-export default function App() {
+const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
+
+export default function Home() {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("@/assets/logo.png")} />
@@ -16,8 +18,11 @@ export default function App() {
       </View>
 
       <View style={styles.content}>
-        <Filter status={FilterStatus.DONE} isActive={true} />
-        <Filter status={FilterStatus.PENDING} isActive={false} />
+        <View style={styles.header}>
+          {FILTER_STATUS.map((status) => {
+            return <Filter key={status} status={status} isActive />;
+          })}
+        </View>
       </View>
     </View>
   );
