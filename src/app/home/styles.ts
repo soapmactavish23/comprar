@@ -19,13 +19,13 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    width: '100%',
-    backgroundColor: '#FFF',
+    width: "100%",
+    backgroundColor: "#FFF",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 24,
     paddingTop: 32,
-    marginTop: 24
+    marginTop: 24,
   },
   header: {
     width: "100%",
@@ -33,6 +33,14 @@ export const styles = StyleSheet.create({
     gap: 12,
     borderBottomWidth: 1,
     borderBottomColor: "#E4E6EC",
-    paddingBottom: 12
-  }
+    paddingBottom: 12,
+  },
+  clearButton: {
+    marginLeft: "auto"
+  },
+  clearText: {
+    fontSize: 12,
+    color: "#828282",
+    fontWeight: 600,
+  },
 });

@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -20,8 +20,18 @@ export default function Home() {
       <View style={styles.content}>
         <View style={styles.header}>
           {FILTER_STATUS.map((status) => {
-            return <Filter key={status} status={status} isActive />;
+            return (
+              <Filter
+                key={status}
+                status={status}
+                isActive={status === FilterStatus.DONE}
+              />
+            );
           })}
+
+          <TouchableOpacity style={styles.clearButton}>
+            <Text style={styles.clearText}>Limpar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
