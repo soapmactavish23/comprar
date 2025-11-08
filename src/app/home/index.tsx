@@ -1,4 +1,11 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { styles } from "./styles";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -7,6 +14,7 @@ import { FilterStatus } from "@/types/FilterStatus";
 import { Item } from "@/components/Item";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
+const ITEMS = Array.from({ length: 100 }).map((_, index) => String(index));
 
 export default function Home() {
   return (
@@ -35,16 +43,18 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        <ScrollView>
-          {Array.from({ length: 100 }).map((_, index) => (
+        <FlatList
+          data={ITEMS}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => (
             <Item
-              key={index}
+              key={item}
               data={{ status: FilterStatus.DONE, description: "Café" }}
               onRemove={() => {}}
               onStatus={() => {}}
             />
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
     </View>
   );
