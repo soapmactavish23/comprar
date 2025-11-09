@@ -12,6 +12,7 @@ import { Input } from "@/components/Input";
 import { Filter } from "@/components/Filter";
 import { FilterStatus } from "@/types/FilterStatus";
 import { Item } from "@/components/Item";
+import { useState } from "react";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
 const ITEMS = [
@@ -25,6 +26,9 @@ const ITEMS = [
 ];
 
 export default function Home() {
+  const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
+  
+
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("@/assets/logo.png")} />
@@ -41,7 +45,8 @@ export default function Home() {
               <Filter
                 key={status}
                 status={status}
-                isActive={status === FilterStatus.DONE}
+                isActive={status === filter}
+                onPress={() => setFilter(status)}
               />
             );
           })}
