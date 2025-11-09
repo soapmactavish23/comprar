@@ -27,14 +27,19 @@ const ITEMS = [
 
 export default function Home() {
   const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
-  
+  const [description, setDescription] = useState("");
 
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("@/assets/logo.png")} />
 
       <View style={styles.form}>
-        <Input placeholder="O que você precisa comprar?" />
+        <Input
+          placeholder="O que você precisa comprar?"
+          value={description}
+          onChangeText={setDescription}
+        />
+        <Text>{description}</Text>
         <Button title="Adicionar" />
       </View>
 
@@ -68,9 +73,11 @@ export default function Home() {
             />
           )}
           showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View style={styles.separator}/>}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
           contentContainerStyle={styles.listContent}
-          ListEmptyComponent={() => <Text style={styles.empty}>Nenhum item aqui.</Text>}
+          ListEmptyComponent={() => (
+            <Text style={styles.empty}>Nenhum item aqui.</Text>
+          )}
         />
       </View>
     </View>
