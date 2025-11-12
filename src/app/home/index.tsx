@@ -2,7 +2,6 @@ import {
   Alert,
   FlatList,
   Image,
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -13,7 +12,8 @@ import { Input } from "@/components/Input";
 import { Filter } from "@/components/Filter";
 import { FilterStatus } from "@/types/FilterStatus";
 import { Item } from "@/components/Item";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { itemsStorage } from "@/storage/itemsStorage";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
 
@@ -30,11 +30,25 @@ export default function Home() {
     const newItem = {
       id: Math.random().toString(36).substring(2),
       description,
-      status: FilterStatus.PENDING
-    }
+      status: FilterStatus.PENDING,
+    };
 
-    setItems((prevState: any) => [...prevState ,newItem])
+    setItems((prevState: any) => [...prevState, newItem]);
   }
+
+  async function getItems() {
+    try {
+      const response = await itemsStorage.get();
+      setItems(response);
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Erro", "Não foi possível filtrar os itens.");
+    }
+  }
+
+  useEffect(() => {
+    getItems();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,7 +61,7 @@ export default function Home() {
           onChangeText={setDescription}
         />
         <Text>{description}</Text>
-        <Button title="Adicionar" onPress={handleAdd}/>
+        <Button title="Adicionar" onPress={handleAdd} />
       </View>
 
       <View style={styles.content}>
