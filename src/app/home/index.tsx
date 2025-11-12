@@ -22,7 +22,7 @@ export default function Home() {
   const [description, setDescription] = useState("");
   const [items, setItems] = useState<any>([]);
 
-  function handleAdd() {
+  async function handleAdd() {
     if (!description.trim()) {
       return Alert.alert("Adicionar", "Informe a descrição para adicionar");
     }
@@ -33,7 +33,8 @@ export default function Home() {
       status: FilterStatus.PENDING,
     };
 
-    setItems((prevState: any) => [...prevState, newItem]);
+    await itemsStorage.add(newItem);
+    await getItems();
   }
 
   async function getItems() {
