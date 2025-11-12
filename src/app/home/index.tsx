@@ -34,12 +34,12 @@ export default function Home() {
     };
 
     await itemsStorage.add(newItem);
-    await getItems();
+    await itemsByStatus();
   }
 
-  async function getItems() {
+  async function itemsByStatus() {
     try {
-      const response = await itemsStorage.get();
+      const response = await itemsStorage.getByStatus(filter);
       setItems(response);
     } catch (error) {
       console.error(error);
@@ -48,8 +48,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getItems();
-  }, []);
+    itemsByStatus();
+  }, [filter]);
 
   return (
     <View style={styles.container}>
@@ -61,7 +61,6 @@ export default function Home() {
           value={description}
           onChangeText={setDescription}
         />
-        <Text>{description}</Text>
         <Button title="Adicionar" onPress={handleAdd} />
       </View>
 
