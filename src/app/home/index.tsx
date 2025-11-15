@@ -78,6 +78,17 @@ export default function Home() {
     }
   }
 
+  async function handleToggleItemStatus(id: string) {
+    try {
+      console.log(id)
+      await itemsStorage.toggleStatus(id);
+      await itemsByStatus();
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Não foi possível atualizar o status.");
+    }
+  }
+
   useEffect(() => {
     itemsByStatus();
   }, [filter]);
@@ -123,7 +134,7 @@ export default function Home() {
               onRemove={() => {
                 handleRemove(item.id);
               }}
-              onStatus={() => {}}
+              onStatus={() => handleToggleItemStatus(item.id)}
             />
           )}
           showsHorizontalScrollIndicator={false}
